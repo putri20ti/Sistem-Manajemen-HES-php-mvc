@@ -1,0 +1,46 @@
+-- Tabel kendaraan
+CREATE TABLE kendaraan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    no_plat VARCHAR(20) NOT NULL,
+    bulan VARCHAR(20) NOT NULL,
+    tipe_kendaraan VARCHAR(50) NOT NULL,
+    lokasi VARCHAR(50) NOT NULL,
+    perusahaan VARCHAR(50) NOT NULL
+);
+
+-- Tabel inspeksi
+CREATE TABLE inspeksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kendaraan_id INT,
+    tipe_inspeksi ENUM('Harian', 'Mingguan', 'Bulanan') NOT NULL,
+    tanggal DATE NOT NULL,
+    FOREIGN KEY (kendaraan_id) REFERENCES kendaraan(id)
+);
+
+-- Tabel harian_inspeksi
+CREATE TABLE harian_inspeksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    inspeksi_id INT,
+    item VARCHAR(100) NOT NULL,
+    tanggal DATE NOT NULL,
+    status ENUM('Baik', 'Tidak Baik') NOT NULL,
+    FOREIGN KEY (inspeksi_id) REFERENCES inspeksi(id)
+);
+
+-- Tabel mingguan_inspeksi
+CREATE TABLE mingguan_inspeksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    inspeksi_id INT,
+    item VARCHAR(100) NOT NULL,
+    status ENUM('Baik', 'Tidak Baik') NOT NULL,
+    FOREIGN KEY (inspeksi_id) REFERENCES inspeksi(id)
+);
+
+-- Tabel bulanan_inspeksi
+CREATE TABLE bulanan_inspeksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    inspeksi_id INT,
+    item VARCHAR(100) NOT NULL,
+    status ENUM('Baik', 'Tidak Baik') NOT NULL,
+    FOREIGN KEY (inspeksi_id) REFERENCES inspeksi(id)
+);

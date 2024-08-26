@@ -1,0 +1,6 @@
+.navbar-light {
+    background-color: #add8e6; /* Warna biru muda */
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #333; /* Warna teks */
+}
